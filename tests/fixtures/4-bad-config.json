@@ -1,0 +1,1170 @@
+{
+  "version": 1,
+  "incident_id": 1,
+  "collected_at": "2026-10-25T19:20:08Z",
+  "window_start": 1792955820.0,
+  "window_end": 1792956008.0,
+  "trigger": [
+    "lb_down: 3 consecutive LB health failures",
+    "error_rate: 100% 5xx over 57 requests in 30s"
+  ],
+  "project": "vip",
+  "service": "api",
+  "deployed_sha": "bdb583a6e50d19a6a5c224d9b543e8535fd2a6ce",
+  "known_good_sha": "9034f6e6b4ddca5da49a8f103f91fd1231eb61ac",
+  "lb_health": {
+    "/health": {
+      "status": 503,
+      "ms": 1503,
+      "body": "{\"ok\": false, \"replica\": \"3f2a9c1d7b44\", \"sha\": \"bdb583a6e50d19a6a5c224d9b543e8535fd2a6ce\", \"error\": \"The client is closed\"}"
+    }
+  },
+  "containers": [
+    {
+      "name": "vip-api-1",
+      "id": "aaavip0api01",
+      "service": "api",
+      "image": "vip-api:bdb583a6e50d19a6a5c224d9b543e8535fd2a6ce",
+      "sha": "bdb583a6e50d19a6a5c224d9b543e8535fd2a6ce",
+      "status": "running",
+      "running": true,
+      "exit_code": 0,
+      "oom_killed": false,
+      "restart_count": 0,
+      "started_at": "2026-10-25T19:05:00.000000000Z",
+      "finished_at": null,
+      "health": "unhealthy",
+      "health_log": [
+        "exit=1 wget: server returned error: HTTP/1.1 503 Service Unavailable",
+        "exit=1 wget: server returned error: HTTP/1.1 503 Service Unavailable",
+        "exit=1 wget: server returned error: HTTP/1.1 503 Service Unavailable"
+      ],
+      "mem_usage": 62914560,
+      "mem_limit": 268435456,
+      "cpu_pct": 7.5,
+      "error": null
+    },
+    {
+      "name": "vip-api-2",
+      "id": "aaavip0api02",
+      "service": "api",
+      "image": "vip-api:bdb583a6e50d19a6a5c224d9b543e8535fd2a6ce",
+      "sha": "bdb583a6e50d19a6a5c224d9b543e8535fd2a6ce",
+      "status": "running",
+      "running": true,
+      "exit_code": 0,
+      "oom_killed": false,
+      "restart_count": 0,
+      "started_at": "2026-10-25T19:05:00.000000000Z",
+      "finished_at": null,
+      "health": "unhealthy",
+      "health_log": [
+        "exit=1 wget: server returned error: HTTP/1.1 503 Service Unavailable",
+        "exit=1 wget: server returned error: HTTP/1.1 503 Service Unavailable",
+        "exit=1 wget: server returned error: HTTP/1.1 503 Service Unavailable"
+      ],
+      "mem_usage": 62914560,
+      "mem_limit": 268435456,
+      "cpu_pct": 7.5,
+      "error": null
+    },
+    {
+      "name": "vip-api-3",
+      "id": "aaavip0api03",
+      "service": "api",
+      "image": "vip-api:bdb583a6e50d19a6a5c224d9b543e8535fd2a6ce",
+      "sha": "bdb583a6e50d19a6a5c224d9b543e8535fd2a6ce",
+      "status": "running",
+      "running": true,
+      "exit_code": 0,
+      "oom_killed": false,
+      "restart_count": 0,
+      "started_at": "2026-10-25T19:05:00.000000000Z",
+      "finished_at": null,
+      "health": "unhealthy",
+      "health_log": [
+        "exit=1 wget: server returned error: HTTP/1.1 503 Service Unavailable",
+        "exit=1 wget: server returned error: HTTP/1.1 503 Service Unavailable",
+        "exit=1 wget: server returned error: HTTP/1.1 503 Service Unavailable"
+      ],
+      "mem_usage": 62914560,
+      "mem_limit": 268435456,
+      "cpu_pct": 7.5,
+      "error": null
+    }
+  ],
+  "dependencies": [
+    {
+      "name": "vip-redis-1",
+      "id": "b0d1e2f3a4c5",
+      "service": "redis",
+      "image": "redis:7-alpine",
+      "sha": null,
+      "status": "running",
+      "running": true,
+      "exit_code": 0,
+      "oom_killed": false,
+      "restart_count": 0,
+      "started_at": null,
+      "finished_at": null,
+      "health": null,
+      "health_log": [],
+      "mem_usage": 9437184,
+      "mem_limit": null,
+      "cpu_pct": null,
+      "error": null
+    },
+    {
+      "name": "vip-lb-1",
+      "id": "aa11bb22cc33",
+      "service": "lb",
+      "image": "nginx:1.27-alpine",
+      "sha": null,
+      "status": "running",
+      "running": true,
+      "exit_code": 0,
+      "oom_killed": false,
+      "restart_count": 0,
+      "started_at": null,
+      "finished_at": null,
+      "health": null,
+      "health_log": [],
+      "mem_usage": 4194304,
+      "mem_limit": null,
+      "cpu_pct": null,
+      "error": null
+    }
+  ],
+  "log_stats": {
+    "lines": 140,
+    "requests": 60,
+    "status_2xx": 0,
+    "status_4xx": 0,
+    "status_5xx": 60,
+    "errors": 80,
+    "fatals": 0
+  },
+  "clusters": [
+    {
+      "signature": "ClientClosedError|The client is closed|index.js:RedisClient._RedisClient_sendCommand>server.js:?",
+      "err_type": "ClientClosedError",
+      "message": "The client is closed",
+      "count": 60,
+      "first_seen": 1792955940.7,
+      "last_seen": 1792955995.3,
+      "replicas": [
+        "8e1d02aa9f10",
+        "c47b5e6d2a83",
+        "3f2a9c1d7b44"
+      ],
+      "levels": [
+        50
+      ],
+      "stack": "ClientClosedError: The client is closed\n    at RedisClient._RedisClient_sendCommand (/app/node_modules/@redis/client/dist/lib/client/index.js:510:31)\n    at async /app/src/server.js:137:17",
+      "frames": [
+        {
+          "function": "RedisClient._RedisClient_sendCommand",
+          "file": "/app/node_modules/@redis/client/dist/lib/client/index.js",
+          "line": 510,
+          "col": 31,
+          "repo_path": null
+        },
+        {
+          "function": null,
+          "file": "/app/src/server.js",
+          "line": 137,
+          "col": 17,
+          "repo_path": "src/server.js"
+        }
+      ]
+    },
+    {
+      "signature": "Error|connect ECONNREFUSED <n>.<n>:<n>|",
+      "err_type": "Error",
+      "message": "connect ECONNREFUSED 172.19.0.3:6380",
+      "count": 20,
+      "first_seen": 1792955940.0,
+      "last_seen": 1792955993.2,
+      "replicas": [
+        "3f2a9c1d7b44",
+        "8e1d02aa9f10",
+        "c47b5e6d2a83"
+      ],
+      "levels": [
+        50
+      ],
+      "stack": "Error: connect ECONNREFUSED 172.19.0.3:6380\n    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1615:16)",
+      "frames": [
+        {
+          "function": "TCPConnectWrap.afterConnect [as oncomplete]",
+          "file": "node:net",
+          "line": 1615,
+          "col": 16,
+          "repo_path": null
+        }
+      ]
+    },
+    {
+      "signature": "HTTP5xx|HTTP <n> on GET (lb)|",
+      "err_type": "HTTP5xx",
+      "message": "HTTP 500 on GET (lb)",
+      "count": 60,
+      "first_seen": 1792955940.703,
+      "last_seen": 1792955995.303,
+      "replicas": [],
+      "levels": [
+        30
+      ],
+      "stack": null,
+      "frames": []
+    }
+  ],
+  "log_sample": [
+    {
+      "ts": 1792955972.2,
+      "container": "",
+      "replica": "8e1d02aa9f10",
+      "level": 50,
+      "msg": "request errored",
+      "status": 500,
+      "method": "GET",
+      "url": "/k0046x",
+      "err_type": "ClientClosedError",
+      "err_message": "The client is closed",
+      "err_stack": "ClientClosedError: The client is closed\n    at RedisClient._RedisClient_sendCommand (/app/node_modules/@redis/client/dist/lib/client/index.js:510:31)\n    at async /app/src/server.js:137:17",
+      "raw": null
+    },
+    {
+      "ts": 1792955972.203,
+      "container": "",
+      "replica": null,
+      "level": 30,
+      "msg": "",
+      "status": 500,
+      "method": "GET",
+      "url": "/k0046x",
+      "err_type": null,
+      "err_message": null,
+      "err_stack": null,
+      "raw": "172.19.0.7 - - [25/Oct/2026:19:19:32 +0000] \"GET /k0046x HTTP/1.1\" 500 157 \"-\" \"vip-traffic/1.0\""
+    },
+    {
+      "ts": 1792955972.9,
+      "container": "",
+      "replica": "c47b5e6d2a83",
+      "level": 50,
+      "msg": "request errored",
+      "status": 500,
+      "method": "GET",
+      "url": "/k0047x",
+      "err_type": "ClientClosedError",
+      "err_message": "The client is closed",
+      "err_stack": "ClientClosedError: The client is closed\n    at RedisClient._RedisClient_sendCommand (/app/node_modules/@redis/client/dist/lib/client/index.js:510:31)\n    at async /app/src/server.js:137:17",
+      "raw": null
+    },
+    {
+      "ts": 1792955972.903,
+      "container": "",
+      "replica": null,
+      "level": 30,
+      "msg": "",
+      "status": 500,
+      "method": "GET",
+      "url": "/k0047x",
+      "err_type": null,
+      "err_message": null,
+      "err_stack": null,
+      "raw": "172.19.0.7 - - [25/Oct/2026:19:19:32 +0000] \"GET /k0047x HTTP/1.1\" 500 157 \"-\" \"vip-traffic/1.0\""
+    },
+    {
+      "ts": 1792955973.6,
+      "container": "",
+      "replica": "3f2a9c1d7b44",
+      "level": 50,
+      "msg": "redis connection error",
+      "status": null,
+      "method": null,
+      "url": null,
+      "err_type": "Error",
+      "err_message": "connect ECONNREFUSED 172.19.0.3:6380",
+      "err_stack": "Error: connect ECONNREFUSED 172.19.0.3:6380\n    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1615:16)",
+      "raw": null
+    },
+    {
+      "ts": 1792955974.3,
+      "container": "",
+      "replica": "8e1d02aa9f10",
+      "level": 50,
+      "msg": "request errored",
+      "status": 500,
+      "method": "GET",
+      "url": "/k0049x",
+      "err_type": "ClientClosedError",
+      "err_message": "The client is closed",
+      "err_stack": "ClientClosedError: The client is closed\n    at RedisClient._RedisClient_sendCommand (/app/node_modules/@redis/client/dist/lib/client/index.js:510:31)\n    at async /app/src/server.js:137:17",
+      "raw": null
+    },
+    {
+      "ts": 1792955974.303,
+      "container": "",
+      "replica": null,
+      "level": 30,
+      "msg": "",
+      "status": 500,
+      "method": "GET",
+      "url": "/k0049x",
+      "err_type": null,
+      "err_message": null,
+      "err_stack": null,
+      "raw": "172.19.0.7 - - [25/Oct/2026:19:19:34 +0000] \"GET /k0049x HTTP/1.1\" 500 157 \"-\" \"vip-traffic/1.0\""
+    },
+    {
+      "ts": 1792955975.0,
+      "container": "",
+      "replica": "c47b5e6d2a83",
+      "level": 50,
+      "msg": "request errored",
+      "status": 500,
+      "method": "GET",
+      "url": "/k0050x",
+      "err_type": "ClientClosedError",
+      "err_message": "The client is closed",
+      "err_stack": "ClientClosedError: The client is closed\n    at RedisClient._RedisClient_sendCommand (/app/node_modules/@redis/client/dist/lib/client/index.js:510:31)\n    at async /app/src/server.js:137:17",
+      "raw": null
+    },
+    {
+      "ts": 1792955975.003,
+      "container": "",
+      "replica": null,
+      "level": 30,
+      "msg": "",
+      "status": 500,
+      "method": "GET",
+      "url": "/k0050x",
+      "err_type": null,
+      "err_message": null,
+      "err_stack": null,
+      "raw": "172.19.0.7 - - [25/Oct/2026:19:19:35 +0000] \"GET /k0050x HTTP/1.1\" 500 157 \"-\" \"vip-traffic/1.0\""
+    },
+    {
+      "ts": 1792955975.7,
+      "container": "",
+      "replica": "3f2a9c1d7b44",
+      "level": 50,
+      "msg": "request errored",
+      "status": 500,
+      "method": "GET",
+      "url": "/k0051x",
+      "err_type": "ClientClosedError",
+      "err_message": "The client is closed",
+      "err_stack": "ClientClosedError: The client is closed\n    at RedisClient._RedisClient_sendCommand (/app/node_modules/@redis/client/dist/lib/client/index.js:510:31)\n    at async /app/src/server.js:137:17",
+      "raw": null
+    },
+    {
+      "ts": 1792955975.703,
+      "container": "",
+      "replica": null,
+      "level": 30,
+      "msg": "",
+      "status": 500,
+      "method": "GET",
+      "url": "/k0051x",
+      "err_type": null,
+      "err_message": null,
+      "err_stack": null,
+      "raw": "172.19.0.7 - - [25/Oct/2026:19:19:35 +0000] \"GET /k0051x HTTP/1.1\" 500 157 \"-\" \"vip-traffic/1.0\""
+    },
+    {
+      "ts": 1792955976.4,
+      "container": "",
+      "replica": "8e1d02aa9f10",
+      "level": 50,
+      "msg": "redis connection error",
+      "status": null,
+      "method": null,
+      "url": null,
+      "err_type": "Error",
+      "err_message": "connect ECONNREFUSED 172.19.0.3:6380",
+      "err_stack": "Error: connect ECONNREFUSED 172.19.0.3:6380\n    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1615:16)",
+      "raw": null
+    },
+    {
+      "ts": 1792955977.1,
+      "container": "",
+      "replica": "c47b5e6d2a83",
+      "level": 50,
+      "msg": "request errored",
+      "status": 500,
+      "method": "GET",
+      "url": "/k0053x",
+      "err_type": "ClientClosedError",
+      "err_message": "The client is closed",
+      "err_stack": "ClientClosedError: The client is closed\n    at RedisClient._RedisClient_sendCommand (/app/node_modules/@redis/client/dist/lib/client/index.js:510:31)\n    at async /app/src/server.js:137:17",
+      "raw": null
+    },
+    {
+      "ts": 1792955977.103,
+      "container": "",
+      "replica": null,
+      "level": 30,
+      "msg": "",
+      "status": 500,
+      "method": "GET",
+      "url": "/k0053x",
+      "err_type": null,
+      "err_message": null,
+      "err_stack": null,
+      "raw": "172.19.0.7 - - [25/Oct/2026:19:19:37 +0000] \"GET /k0053x HTTP/1.1\" 500 157 \"-\" \"vip-traffic/1.0\""
+    },
+    {
+      "ts": 1792955977.8,
+      "container": "",
+      "replica": "3f2a9c1d7b44",
+      "level": 50,
+      "msg": "request errored",
+      "status": 500,
+      "method": "GET",
+      "url": "/k0054x",
+      "err_type": "ClientClosedError",
+      "err_message": "The client is closed",
+      "err_stack": "ClientClosedError: The client is closed\n    at RedisClient._RedisClient_sendCommand (/app/node_modules/@redis/client/dist/lib/client/index.js:510:31)\n    at async /app/src/server.js:137:17",
+      "raw": null
+    },
+    {
+      "ts": 1792955977.803,
+      "container": "",
+      "replica": null,
+      "level": 30,
+      "msg": "",
+      "status": 500,
+      "method": "GET",
+      "url": "/k0054x",
+      "err_type": null,
+      "err_message": null,
+      "err_stack": null,
+      "raw": "172.19.0.7 - - [25/Oct/2026:19:19:37 +0000] \"GET /k0054x HTTP/1.1\" 500 157 \"-\" \"vip-traffic/1.0\""
+    },
+    {
+      "ts": 1792955978.5,
+      "container": "",
+      "replica": "8e1d02aa9f10",
+      "level": 50,
+      "msg": "request errored",
+      "status": 500,
+      "method": "GET",
+      "url": "/k0055x",
+      "err_type": "ClientClosedError",
+      "err_message": "The client is closed",
+      "err_stack": "ClientClosedError: The client is closed\n    at RedisClient._RedisClient_sendCommand (/app/node_modules/@redis/client/dist/lib/client/index.js:510:31)\n    at async /app/src/server.js:137:17",
+      "raw": null
+    },
+    {
+      "ts": 1792955978.503,
+      "container": "",
+      "replica": null,
+      "level": 30,
+      "msg": "",
+      "status": 500,
+      "method": "GET",
+      "url": "/k0055x",
+      "err_type": null,
+      "err_message": null,
+      "err_stack": null,
+      "raw": "172.19.0.7 - - [25/Oct/2026:19:19:38 +0000] \"GET /k0055x HTTP/1.1\" 500 157 \"-\" \"vip-traffic/1.0\""
+    },
+    {
+      "ts": 1792955979.2,
+      "container": "",
+      "replica": "c47b5e6d2a83",
+      "level": 50,
+      "msg": "redis connection error",
+      "status": null,
+      "method": null,
+      "url": null,
+      "err_type": "Error",
+      "err_message": "connect ECONNREFUSED 172.19.0.3:6380",
+      "err_stack": "Error: connect ECONNREFUSED 172.19.0.3:6380\n    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1615:16)",
+      "raw": null
+    },
+    {
+      "ts": 1792955979.9,
+      "container": "",
+      "replica": "3f2a9c1d7b44",
+      "level": 50,
+      "msg": "request errored",
+      "status": 500,
+      "method": "GET",
+      "url": "/k0057x",
+      "err_type": "ClientClosedError",
+      "err_message": "The client is closed",
+      "err_stack": "ClientClosedError: The client is closed\n    at RedisClient._RedisClient_sendCommand (/app/node_modules/@redis/client/dist/lib/client/index.js:510:31)\n    at async /app/src/server.js:137:17",
+      "raw": null
+    },
+    {
+      "ts": 1792955979.903,
+      "container": "",
+      "replica": null,
+      "level": 30,
+      "msg": "",
+      "status": 500,
+      "method": "GET",
+      "url": "/k0057x",
+      "err_type": null,
+      "err_message": null,
+      "err_stack": null,
+      "raw": "172.19.0.7 - - [25/Oct/2026:19:19:39 +0000] \"GET /k0057x HTTP/1.1\" 500 157 \"-\" \"vip-traffic/1.0\""
+    },
+    {
+      "ts": 1792955980.6,
+      "container": "",
+      "replica": "8e1d02aa9f10",
+      "level": 50,
+      "msg": "request errored",
+      "status": 500,
+      "method": "GET",
+      "url": "/k0058x",
+      "err_type": "ClientClosedError",
+      "err_message": "The client is closed",
+      "err_stack": "ClientClosedError: The client is closed\n    at RedisClient._RedisClient_sendCommand (/app/node_modules/@redis/client/dist/lib/client/index.js:510:31)\n    at async /app/src/server.js:137:17",
+      "raw": null
+    },
+    {
+      "ts": 1792955980.603,
+      "container": "",
+      "replica": null,
+      "level": 30,
+      "msg": "",
+      "status": 500,
+      "method": "GET",
+      "url": "/k0058x",
+      "err_type": null,
+      "err_message": null,
+      "err_stack": null,
+      "raw": "172.19.0.7 - - [25/Oct/2026:19:19:40 +0000] \"GET /k0058x HTTP/1.1\" 500 157 \"-\" \"vip-traffic/1.0\""
+    },
+    {
+      "ts": 1792955981.3,
+      "container": "",
+      "replica": "c47b5e6d2a83",
+      "level": 50,
+      "msg": "request errored",
+      "status": 500,
+      "method": "GET",
+      "url": "/k0059x",
+      "err_type": "ClientClosedError",
+      "err_message": "The client is closed",
+      "err_stack": "ClientClosedError: The client is closed\n    at RedisClient._RedisClient_sendCommand (/app/node_modules/@redis/client/dist/lib/client/index.js:510:31)\n    at async /app/src/server.js:137:17",
+      "raw": null
+    },
+    {
+      "ts": 1792955981.303,
+      "container": "",
+      "replica": null,
+      "level": 30,
+      "msg": "",
+      "status": 500,
+      "method": "GET",
+      "url": "/k0059x",
+      "err_type": null,
+      "err_message": null,
+      "err_stack": null,
+      "raw": "172.19.0.7 - - [25/Oct/2026:19:19:41 +0000] \"GET /k0059x HTTP/1.1\" 500 157 \"-\" \"vip-traffic/1.0\""
+    },
+    {
+      "ts": 1792955982.0,
+      "container": "",
+      "replica": "3f2a9c1d7b44",
+      "level": 50,
+      "msg": "redis connection error",
+      "status": null,
+      "method": null,
+      "url": null,
+      "err_type": "Error",
+      "err_message": "connect ECONNREFUSED 172.19.0.3:6380",
+      "err_stack": "Error: connect ECONNREFUSED 172.19.0.3:6380\n    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1615:16)",
+      "raw": null
+    },
+    {
+      "ts": 1792955982.7,
+      "container": "",
+      "replica": "8e1d02aa9f10",
+      "level": 50,
+      "msg": "request errored",
+      "status": 500,
+      "method": "GET",
+      "url": "/k0061x",
+      "err_type": "ClientClosedError",
+      "err_message": "The client is closed",
+      "err_stack": "ClientClosedError: The client is closed\n    at RedisClient._RedisClient_sendCommand (/app/node_modules/@redis/client/dist/lib/client/index.js:510:31)\n    at async /app/src/server.js:137:17",
+      "raw": null
+    },
+    {
+      "ts": 1792955982.703,
+      "container": "",
+      "replica": null,
+      "level": 30,
+      "msg": "",
+      "status": 500,
+      "method": "GET",
+      "url": "/k0061x",
+      "err_type": null,
+      "err_message": null,
+      "err_stack": null,
+      "raw": "172.19.0.7 - - [25/Oct/2026:19:19:42 +0000] \"GET /k0061x HTTP/1.1\" 500 157 \"-\" \"vip-traffic/1.0\""
+    },
+    {
+      "ts": 1792955983.4,
+      "container": "",
+      "replica": "c47b5e6d2a83",
+      "level": 50,
+      "msg": "request errored",
+      "status": 500,
+      "method": "GET",
+      "url": "/k0062x",
+      "err_type": "ClientClosedError",
+      "err_message": "The client is closed",
+      "err_stack": "ClientClosedError: The client is closed\n    at RedisClient._RedisClient_sendCommand (/app/node_modules/@redis/client/dist/lib/client/index.js:510:31)\n    at async /app/src/server.js:137:17",
+      "raw": null
+    },
+    {
+      "ts": 1792955983.403,
+      "container": "",
+      "replica": null,
+      "level": 30,
+      "msg": "",
+      "status": 500,
+      "method": "GET",
+      "url": "/k0062x",
+      "err_type": null,
+      "err_message": null,
+      "err_stack": null,
+      "raw": "172.19.0.7 - - [25/Oct/2026:19:19:43 +0000] \"GET /k0062x HTTP/1.1\" 500 157 \"-\" \"vip-traffic/1.0\""
+    },
+    {
+      "ts": 1792955984.1,
+      "container": "",
+      "replica": "3f2a9c1d7b44",
+      "level": 50,
+      "msg": "request errored",
+      "status": 500,
+      "method": "GET",
+      "url": "/k0063x",
+      "err_type": "ClientClosedError",
+      "err_message": "The client is closed",
+      "err_stack": "ClientClosedError: The client is closed\n    at RedisClient._RedisClient_sendCommand (/app/node_modules/@redis/client/dist/lib/client/index.js:510:31)\n    at async /app/src/server.js:137:17",
+      "raw": null
+    },
+    {
+      "ts": 1792955984.103,
+      "container": "",
+      "replica": null,
+      "level": 30,
+      "msg": "",
+      "status": 500,
+      "method": "GET",
+      "url": "/k0063x",
+      "err_type": null,
+      "err_message": null,
+      "err_stack": null,
+      "raw": "172.19.0.7 - - [25/Oct/2026:19:19:44 +0000] \"GET /k0063x HTTP/1.1\" 500 157 \"-\" \"vip-traffic/1.0\""
+    },
+    {
+      "ts": 1792955984.8,
+      "container": "",
+      "replica": "8e1d02aa9f10",
+      "level": 50,
+      "msg": "redis connection error",
+      "status": null,
+      "method": null,
+      "url": null,
+      "err_type": "Error",
+      "err_message": "connect ECONNREFUSED 172.19.0.3:6380",
+      "err_stack": "Error: connect ECONNREFUSED 172.19.0.3:6380\n    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1615:16)",
+      "raw": null
+    },
+    {
+      "ts": 1792955985.5,
+      "container": "",
+      "replica": "c47b5e6d2a83",
+      "level": 50,
+      "msg": "request errored",
+      "status": 500,
+      "method": "GET",
+      "url": "/k0065x",
+      "err_type": "ClientClosedError",
+      "err_message": "The client is closed",
+      "err_stack": "ClientClosedError: The client is closed\n    at RedisClient._RedisClient_sendCommand (/app/node_modules/@redis/client/dist/lib/client/index.js:510:31)\n    at async /app/src/server.js:137:17",
+      "raw": null
+    },
+    {
+      "ts": 1792955985.503,
+      "container": "",
+      "replica": null,
+      "level": 30,
+      "msg": "",
+      "status": 500,
+      "method": "GET",
+      "url": "/k0065x",
+      "err_type": null,
+      "err_message": null,
+      "err_stack": null,
+      "raw": "172.19.0.7 - - [25/Oct/2026:19:19:45 +0000] \"GET /k0065x HTTP/1.1\" 500 157 \"-\" \"vip-traffic/1.0\""
+    },
+    {
+      "ts": 1792955986.2,
+      "container": "",
+      "replica": "3f2a9c1d7b44",
+      "level": 50,
+      "msg": "request errored",
+      "status": 500,
+      "method": "GET",
+      "url": "/k0066x",
+      "err_type": "ClientClosedError",
+      "err_message": "The client is closed",
+      "err_stack": "ClientClosedError: The client is closed\n    at RedisClient._RedisClient_sendCommand (/app/node_modules/@redis/client/dist/lib/client/index.js:510:31)\n    at async /app/src/server.js:137:17",
+      "raw": null
+    },
+    {
+      "ts": 1792955986.203,
+      "container": "",
+      "replica": null,
+      "level": 30,
+      "msg": "",
+      "status": 500,
+      "method": "GET",
+      "url": "/k0066x",
+      "err_type": null,
+      "err_message": null,
+      "err_stack": null,
+      "raw": "172.19.0.7 - - [25/Oct/2026:19:19:46 +0000] \"GET /k0066x HTTP/1.1\" 500 157 \"-\" \"vip-traffic/1.0\""
+    },
+    {
+      "ts": 1792955986.9,
+      "container": "",
+      "replica": "8e1d02aa9f10",
+      "level": 50,
+      "msg": "request errored",
+      "status": 500,
+      "method": "GET",
+      "url": "/k0067x",
+      "err_type": "ClientClosedError",
+      "err_message": "The client is closed",
+      "err_stack": "ClientClosedError: The client is closed\n    at RedisClient._RedisClient_sendCommand (/app/node_modules/@redis/client/dist/lib/client/index.js:510:31)\n    at async /app/src/server.js:137:17",
+      "raw": null
+    },
+    {
+      "ts": 1792955986.903,
+      "container": "",
+      "replica": null,
+      "level": 30,
+      "msg": "",
+      "status": 500,
+      "method": "GET",
+      "url": "/k0067x",
+      "err_type": null,
+      "err_message": null,
+      "err_stack": null,
+      "raw": "172.19.0.7 - - [25/Oct/2026:19:19:46 +0000] \"GET /k0067x HTTP/1.1\" 500 157 \"-\" \"vip-traffic/1.0\""
+    },
+    {
+      "ts": 1792955987.6,
+      "container": "",
+      "replica": "c47b5e6d2a83",
+      "level": 50,
+      "msg": "redis connection error",
+      "status": null,
+      "method": null,
+      "url": null,
+      "err_type": "Error",
+      "err_message": "connect ECONNREFUSED 172.19.0.3:6380",
+      "err_stack": "Error: connect ECONNREFUSED 172.19.0.3:6380\n    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1615:16)",
+      "raw": null
+    },
+    {
+      "ts": 1792955988.3,
+      "container": "",
+      "replica": "3f2a9c1d7b44",
+      "level": 50,
+      "msg": "request errored",
+      "status": 500,
+      "method": "GET",
+      "url": "/k0069x",
+      "err_type": "ClientClosedError",
+      "err_message": "The client is closed",
+      "err_stack": "ClientClosedError: The client is closed\n    at RedisClient._RedisClient_sendCommand (/app/node_modules/@redis/client/dist/lib/client/index.js:510:31)\n    at async /app/src/server.js:137:17",
+      "raw": null
+    },
+    {
+      "ts": 1792955988.303,
+      "container": "",
+      "replica": null,
+      "level": 30,
+      "msg": "",
+      "status": 500,
+      "method": "GET",
+      "url": "/k0069x",
+      "err_type": null,
+      "err_message": null,
+      "err_stack": null,
+      "raw": "172.19.0.7 - - [25/Oct/2026:19:19:48 +0000] \"GET /k0069x HTTP/1.1\" 500 157 \"-\" \"vip-traffic/1.0\""
+    },
+    {
+      "ts": 1792955989.0,
+      "container": "",
+      "replica": "8e1d02aa9f10",
+      "level": 50,
+      "msg": "request errored",
+      "status": 500,
+      "method": "GET",
+      "url": "/k0070x",
+      "err_type": "ClientClosedError",
+      "err_message": "The client is closed",
+      "err_stack": "ClientClosedError: The client is closed\n    at RedisClient._RedisClient_sendCommand (/app/node_modules/@redis/client/dist/lib/client/index.js:510:31)\n    at async /app/src/server.js:137:17",
+      "raw": null
+    },
+    {
+      "ts": 1792955989.003,
+      "container": "",
+      "replica": null,
+      "level": 30,
+      "msg": "",
+      "status": 500,
+      "method": "GET",
+      "url": "/k0070x",
+      "err_type": null,
+      "err_message": null,
+      "err_stack": null,
+      "raw": "172.19.0.7 - - [25/Oct/2026:19:19:49 +0000] \"GET /k0070x HTTP/1.1\" 500 157 \"-\" \"vip-traffic/1.0\""
+    },
+    {
+      "ts": 1792955989.7,
+      "container": "",
+      "replica": "c47b5e6d2a83",
+      "level": 50,
+      "msg": "request errored",
+      "status": 500,
+      "method": "GET",
+      "url": "/k0071x",
+      "err_type": "ClientClosedError",
+      "err_message": "The client is closed",
+      "err_stack": "ClientClosedError: The client is closed\n    at RedisClient._RedisClient_sendCommand (/app/node_modules/@redis/client/dist/lib/client/index.js:510:31)\n    at async /app/src/server.js:137:17",
+      "raw": null
+    },
+    {
+      "ts": 1792955989.703,
+      "container": "",
+      "replica": null,
+      "level": 30,
+      "msg": "",
+      "status": 500,
+      "method": "GET",
+      "url": "/k0071x",
+      "err_type": null,
+      "err_message": null,
+      "err_stack": null,
+      "raw": "172.19.0.7 - - [25/Oct/2026:19:19:49 +0000] \"GET /k0071x HTTP/1.1\" 500 157 \"-\" \"vip-traffic/1.0\""
+    },
+    {
+      "ts": 1792955990.4,
+      "container": "",
+      "replica": "3f2a9c1d7b44",
+      "level": 50,
+      "msg": "redis connection error",
+      "status": null,
+      "method": null,
+      "url": null,
+      "err_type": "Error",
+      "err_message": "connect ECONNREFUSED 172.19.0.3:6380",
+      "err_stack": "Error: connect ECONNREFUSED 172.19.0.3:6380\n    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1615:16)",
+      "raw": null
+    },
+    {
+      "ts": 1792955991.1,
+      "container": "",
+      "replica": "8e1d02aa9f10",
+      "level": 50,
+      "msg": "request errored",
+      "status": 500,
+      "method": "GET",
+      "url": "/k0073x",
+      "err_type": "ClientClosedError",
+      "err_message": "The client is closed",
+      "err_stack": "ClientClosedError: The client is closed\n    at RedisClient._RedisClient_sendCommand (/app/node_modules/@redis/client/dist/lib/client/index.js:510:31)\n    at async /app/src/server.js:137:17",
+      "raw": null
+    },
+    {
+      "ts": 1792955991.103,
+      "container": "",
+      "replica": null,
+      "level": 30,
+      "msg": "",
+      "status": 500,
+      "method": "GET",
+      "url": "/k0073x",
+      "err_type": null,
+      "err_message": null,
+      "err_stack": null,
+      "raw": "172.19.0.7 - - [25/Oct/2026:19:19:51 +0000] \"GET /k0073x HTTP/1.1\" 500 157 \"-\" \"vip-traffic/1.0\""
+    },
+    {
+      "ts": 1792955991.8,
+      "container": "",
+      "replica": "c47b5e6d2a83",
+      "level": 50,
+      "msg": "request errored",
+      "status": 500,
+      "method": "GET",
+      "url": "/k0074x",
+      "err_type": "ClientClosedError",
+      "err_message": "The client is closed",
+      "err_stack": "ClientClosedError: The client is closed\n    at RedisClient._RedisClient_sendCommand (/app/node_modules/@redis/client/dist/lib/client/index.js:510:31)\n    at async /app/src/server.js:137:17",
+      "raw": null
+    },
+    {
+      "ts": 1792955991.803,
+      "container": "",
+      "replica": null,
+      "level": 30,
+      "msg": "",
+      "status": 500,
+      "method": "GET",
+      "url": "/k0074x",
+      "err_type": null,
+      "err_message": null,
+      "err_stack": null,
+      "raw": "172.19.0.7 - - [25/Oct/2026:19:19:51 +0000] \"GET /k0074x HTTP/1.1\" 500 157 \"-\" \"vip-traffic/1.0\""
+    },
+    {
+      "ts": 1792955992.5,
+      "container": "",
+      "replica": "3f2a9c1d7b44",
+      "level": 50,
+      "msg": "request errored",
+      "status": 500,
+      "method": "GET",
+      "url": "/k0075x",
+      "err_type": "ClientClosedError",
+      "err_message": "The client is closed",
+      "err_stack": "ClientClosedError: The client is closed\n    at RedisClient._RedisClient_sendCommand (/app/node_modules/@redis/client/dist/lib/client/index.js:510:31)\n    at async /app/src/server.js:137:17",
+      "raw": null
+    },
+    {
+      "ts": 1792955992.503,
+      "container": "",
+      "replica": null,
+      "level": 30,
+      "msg": "",
+      "status": 500,
+      "method": "GET",
+      "url": "/k0075x",
+      "err_type": null,
+      "err_message": null,
+      "err_stack": null,
+      "raw": "172.19.0.7 - - [25/Oct/2026:19:19:52 +0000] \"GET /k0075x HTTP/1.1\" 500 157 \"-\" \"vip-traffic/1.0\""
+    },
+    {
+      "ts": 1792955993.2,
+      "container": "",
+      "replica": "8e1d02aa9f10",
+      "level": 50,
+      "msg": "redis connection error",
+      "status": null,
+      "method": null,
+      "url": null,
+      "err_type": "Error",
+      "err_message": "connect ECONNREFUSED 172.19.0.3:6380",
+      "err_stack": "Error: connect ECONNREFUSED 172.19.0.3:6380\n    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1615:16)",
+      "raw": null
+    },
+    {
+      "ts": 1792955993.9,
+      "container": "",
+      "replica": "c47b5e6d2a83",
+      "level": 50,
+      "msg": "request errored",
+      "status": 500,
+      "method": "GET",
+      "url": "/k0077x",
+      "err_type": "ClientClosedError",
+      "err_message": "The client is closed",
+      "err_stack": "ClientClosedError: The client is closed\n    at RedisClient._RedisClient_sendCommand (/app/node_modules/@redis/client/dist/lib/client/index.js:510:31)\n    at async /app/src/server.js:137:17",
+      "raw": null
+    },
+    {
+      "ts": 1792955993.903,
+      "container": "",
+      "replica": null,
+      "level": 30,
+      "msg": "",
+      "status": 500,
+      "method": "GET",
+      "url": "/k0077x",
+      "err_type": null,
+      "err_message": null,
+      "err_stack": null,
+      "raw": "172.19.0.7 - - [25/Oct/2026:19:19:53 +0000] \"GET /k0077x HTTP/1.1\" 500 157 \"-\" \"vip-traffic/1.0\""
+    },
+    {
+      "ts": 1792955994.6,
+      "container": "",
+      "replica": "3f2a9c1d7b44",
+      "level": 50,
+      "msg": "request errored",
+      "status": 500,
+      "method": "GET",
+      "url": "/k0078x",
+      "err_type": "ClientClosedError",
+      "err_message": "The client is closed",
+      "err_stack": "ClientClosedError: The client is closed\n    at RedisClient._RedisClient_sendCommand (/app/node_modules/@redis/client/dist/lib/client/index.js:510:31)\n    at async /app/src/server.js:137:17",
+      "raw": null
+    },
+    {
+      "ts": 1792955994.603,
+      "container": "",
+      "replica": null,
+      "level": 30,
+      "msg": "",
+      "status": 500,
+      "method": "GET",
+      "url": "/k0078x",
+      "err_type": null,
+      "err_message": null,
+      "err_stack": null,
+      "raw": "172.19.0.7 - - [25/Oct/2026:19:19:54 +0000] \"GET /k0078x HTTP/1.1\" 500 157 \"-\" \"vip-traffic/1.0\""
+    },
+    {
+      "ts": 1792955995.3,
+      "container": "",
+      "replica": "8e1d02aa9f10",
+      "level": 50,
+      "msg": "request errored",
+      "status": 500,
+      "method": "GET",
+      "url": "/k0079x",
+      "err_type": "ClientClosedError",
+      "err_message": "The client is closed",
+      "err_stack": "ClientClosedError: The client is closed\n    at RedisClient._RedisClient_sendCommand (/app/node_modules/@redis/client/dist/lib/client/index.js:510:31)\n    at async /app/src/server.js:137:17",
+      "raw": null
+    },
+    {
+      "ts": 1792955995.303,
+      "container": "",
+      "replica": null,
+      "level": 30,
+      "msg": "",
+      "status": 500,
+      "method": "GET",
+      "url": "/k0079x",
+      "err_type": null,
+      "err_message": null,
+      "err_stack": null,
+      "raw": "172.19.0.7 - - [25/Oct/2026:19:19:55 +0000] \"GET /k0079x HTTP/1.1\" 500 157 \"-\" \"vip-traffic/1.0\""
+    }
+  ],
+  "commits": [
+    {
+      "sha": "bdb583a6e50d19a6a5c224d9b543e8535fd2a6ce",
+      "author_name": "Dana Ortiz",
+      "author_email": "dana@vip.dev",
+      "authored_at": "2026-10-25T17:00:00+00:00",
+      "summary": "ui: point footer at #incidents channel",
+      "message": "ui: point footer at #incidents channel\n",
+      "files": [
+        {
+          "path": "public/index.html",
+          "insertions": 1,
+          "deletions": 1
+        }
+      ],
+      "diff": "diff --git a/public/index.html b/public/index.html\nindex ed07938..e83fe4a 100644\n--- a/public/index.html\n+++ b/public/index.html\n@@ -63,7 +63,7 @@\n       <tbody id=\"recent\"></tbody>\n     </table>\n   </div>\n-  <footer>very-important-project &middot; do not break</footer>\n+  <footer>very-important-project &middot; please do not break &middot; on-call: #incidents</footer>\n </main>\n <script>\n const $ = (id) => document.getElementById(id);",
+      "diff_truncated": false,
+      "hunks": {
+        "public/index.html": [
+          [
+            63,
+            69
+          ]
+        ]
+      }
+    },
+    {
+      "sha": "e81dffdfbf3f5a7258e58a42ae50bc4fca2188cf",
+      "author_name": "Arjun",
+      "author_email": "arjun@vip.dev",
+      "authored_at": "2026-10-25T16:50:00+00:00",
+      "summary": "chore(config): align redis client defaults with staging",
+      "message": "chore(config): align redis client defaults with staging\n",
+      "files": [
+        {
+          "path": "src/config.js",
+          "insertions": 2,
+          "deletions": 2
+        }
+      ],
+      "diff": "diff --git a/src/config.js b/src/config.js\nindex 036fc48..7ef6b5a 100644\n--- a/src/config.js\n+++ b/src/config.js\n@@ -2,7 +2,7 @@\n module.exports = {\n   port: Number(process.env.PORT || 3000),\n   redisHost: process.env.REDIS_HOST || 'redis',\n-  redisPort: Number(process.env.REDIS_PORT || 6379),\n-  redisTimeoutMs: Number(process.env.REDIS_TIMEOUT_MS || 1000),\n+  redisPort: Number(process.env.REDIS_PORT || 6380), // match managed redis in staging\n+  redisTimeoutMs: Number(process.env.REDIS_TIMEOUT_MS || 1500),\n   recentLimit: Number(process.env.RECENT_LIMIT || 1000),\n };",
+      "diff_truncated": false,
+      "hunks": {
+        "src/config.js": [
+          [
+            2,
+            8
+          ]
+        ]
+      }
+    },
+    {
+      "sha": "c156fd19219ea4ed515cf4c111b08d74413ba4bf",
+      "author_name": "Marcus Lee",
+      "author_email": "marcus@vip.dev",
+      "authored_at": "2026-10-25T16:40:00+00:00",
+      "summary": "chore: clearer startup log message",
+      "message": "chore: clearer startup log message\n",
+      "files": [
+        {
+          "path": "src/server.js",
+          "insertions": 1,
+          "deletions": 1
+        }
+      ],
+      "diff": "diff --git a/src/server.js b/src/server.js\nindex 1ea71d0..4976cd0 100644\n--- a/src/server.js\n+++ b/src/server.js\n@@ -151,5 +151,5 @@ app.use((err, req, res, next) => {\n });\n \n app.listen(config.port, () => {\n-  logger.info({ port: config.port }, 'api listening');\n+  logger.info({ port: config.port }, 'api server listening for requests');\n });",
+      "diff_truncated": false,
+      "hunks": {
+        "src/server.js": [
+          [
+            151,
+            155
+          ]
+        ]
+      }
+    }
+  ],
+  "blame": [],
+  "candidates": [
+    {
+      "sha": "e81dffdfbf3f5a7258e58a42ae50bc4fca2188cf",
+      "score": 6.63,
+      "reasons": [
+        "connection errors + changes redis connection settings, env default, src/config.js"
+      ]
+    },
+    {
+      "sha": "c156fd19219ea4ed515cf4c111b08d74413ba4bf",
+      "score": 2.57,
+      "reasons": [
+        "connection errors + changes host/port change"
+      ]
+    },
+    {
+      "sha": "bdb583a6e50d19a6a5c224d9b543e8535fd2a6ce",
+      "score": 0.7,
+      "reasons": []
+    }
+  ],
+  "category_hint": "config",
+  "severity_hint": "SEV1",
+  "impact_hint": "3/3 api replicas unhealthy, crashed or restarting; 100% of 60 requests returned 5xx in the window; LB /health FAILING",
+  "hints": [
+    "connection errors to a downstream dependency in logs"
+  ],
+  "collection_errors": []
+}

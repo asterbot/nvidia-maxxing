@@ -1,0 +1,8 @@
+{
+  "id": "1-memory-leak",
+  "name": "1-memory-leak",
+  "expected_sha": "7ef25cf5411689ba87d8330d94045cae36aec3f1",
+  "expected_category": "resource",
+  "expect_incident": true,
+  "started_at": "2026-10-25T19:18:30Z"
+}

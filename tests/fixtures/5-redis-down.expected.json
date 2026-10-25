@@ -1,0 +1,8 @@
+{
+  "id": "5-redis-down",
+  "name": "5-redis-down",
+  "expected_sha": null,
+  "expected_category": "dependency",
+  "expect_incident": true,
+  "started_at": "2026-10-25T19:18:30Z"
+}

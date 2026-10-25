@@ -1,0 +1,8 @@
+{
+  "id": "4-bad-config",
+  "name": "4-bad-config",
+  "expected_sha": "e81dffdfbf3f5a7258e58a42ae50bc4fca2188cf",
+  "expected_category": "config",
+  "expect_incident": true,
+  "started_at": "2026-10-25T19:18:30Z"
+}

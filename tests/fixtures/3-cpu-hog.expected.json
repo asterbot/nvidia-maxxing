@@ -1,0 +1,8 @@
+{
+  "id": "3-cpu-hog",
+  "name": "3-cpu-hog",
+  "expected_sha": "c6b626466b004c7e3258dc7990dccf2028797af2",
+  "expected_category": "resource",
+  "expect_incident": true,
+  "started_at": "2026-10-25T19:18:30Z"
+}

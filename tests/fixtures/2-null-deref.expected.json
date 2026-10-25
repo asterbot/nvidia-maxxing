@@ -1,0 +1,8 @@
+{
+  "id": "2-null-deref",
+  "name": "2-null-deref",
+  "expected_sha": "6172613c0ed2b4c3b6ce74320c2459e6d0e1f8bb",
+  "expected_category": "code",
+  "expect_incident": true,
+  "started_at": "2026-10-25T19:18:30Z"
+}
