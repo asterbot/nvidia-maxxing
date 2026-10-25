@@ -67,6 +67,8 @@ def print_report(
     head = Text.assemble((f"{name} ", "bold"), (f"[{report.severity}] ", SEVERITY_STYLE.get(report.severity, "bold")),
                          report.summary)
     console.rule(head)
+    for err in bundle.collection_errors:
+        console.print(f"[bold yellow]⚠ {err}[/bold yellow]")
 
     overview = Table.grid(padding=(0, 1))
     overview.add_column(style="bold cyan", no_wrap=True)

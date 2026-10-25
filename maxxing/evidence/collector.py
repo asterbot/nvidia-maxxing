@@ -109,7 +109,11 @@ def analyze(
         try:
             shas = {c.sha for c in bundle.containers if c.sha}
             deployed = bundle.deployed_sha or (sorted(shas)[0] if len(shas) == 1 else None)
-            bundle.deployed_sha = repo.resolve(deployed) or repo.head_sha()
+            resolved = repo.resolve(deployed)
+            if deployed and not resolved:
+                bundle.collection_errors.append(
+                    f"git: deployed commit {deployed[:8]} is not in the repo; analysing HEAD instead (results unreliable)")
+            bundle.deployed_sha = resolved or repo.head_sha()
             bundle.known_good_sha = repo.known_good_sha(deploys or [], bundle.deployed_sha)
             bundle.commits = repo.commits_between(bundle.known_good_sha, bundle.deployed_sha, max_commits)
             bundle.blame = blame_frames(repo, bundle.deployed_sha, bundle.clusters)
@@ -125,8 +129,9 @@ def analyze(
     return bundle
 
 
-def sync_repo(repo: GitRepo, shas: set[str], timeout_s: float) -> None:
-    """Fetch until every deployed SHA exists locally (the push may land a few seconds late)."""
+def sync_repo(repo: GitRepo, shas: set[str], timeout_s: float) -> list[str]:
+    """Fetch until every deployed SHA exists locally (the push may land a few seconds late).
+    Returns the SHAs still missing."""
     deadline = time.monotonic() + timeout_s
     while True:
         try:
@@ -137,7 +142,7 @@ def sync_repo(repo: GitRepo, shas: set[str], timeout_s: float) -> None:
         if not missing or time.monotonic() >= deadline:
             if missing:
                 log.warning("deployed sha %s not found after fetching for %.0fs", missing[0][:8], timeout_s)
-            return
+            return missing
         time.sleep(3)
 
 
@@ -171,7 +176,11 @@ def collect_evidence(
     try:
         repo = GitRepo(settings.repo_path)
         if settings.git_auto_fetch:
-            sync_repo(repo, {c.sha for c in bundle.containers if c.sha}, settings.git_fetch_timeout_s)
+            missing = sync_repo(repo, {c.sha for c in bundle.containers if c.sha}, settings.git_fetch_timeout_s)
+            if missing:
+                bundle.collection_errors.append(
+                    f"git: deployed commit {missing[0][:8]} not found in {settings.repo_path} after fetching for "
+                    f"{settings.git_fetch_timeout_s:.0f}s; was it pushed? (PUSH=1 scripts/deploy.sh)")
     except Exception as e:
         bundle.collection_errors.append(f"git repo {settings.repo_path}: {e}")
     return analyze(bundle, lines, repo, load_deploys(settings.deploys_file), settings.max_commits)
