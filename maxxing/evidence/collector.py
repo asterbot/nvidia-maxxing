@@ -125,6 +125,22 @@ def analyze(
     return bundle
 
 
+def sync_repo(repo: GitRepo, shas: set[str], timeout_s: float) -> None:
+    """Fetch until every deployed SHA exists locally (the push may land a few seconds late)."""
+    deadline = time.monotonic() + timeout_s
+    while True:
+        try:
+            repo.fetch()
+        except Exception as e:
+            log.warning("git fetch failed: %s", e)
+        missing = [s for s in shas if not repo.resolve(s)]
+        if not missing or time.monotonic() >= deadline:
+            if missing:
+                log.warning("deployed sha %s not found after fetching for %.0fs", missing[0][:8], timeout_s)
+            return
+        time.sleep(3)
+
+
 def collect_evidence(
     settings: Settings,
     trigger: list[str] | None = None,
@@ -154,6 +170,8 @@ def collect_evidence(
     repo = None
     try:
         repo = GitRepo(settings.repo_path)
+        if settings.git_auto_fetch:
+            sync_repo(repo, {c.sha for c in bundle.containers if c.sha}, settings.git_fetch_timeout_s)
     except Exception as e:
         bundle.collection_errors.append(f"git repo {settings.repo_path}: {e}")
     return analyze(bundle, lines, repo, load_deploys(settings.deploys_file), settings.max_commits)

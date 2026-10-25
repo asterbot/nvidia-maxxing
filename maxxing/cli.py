@@ -33,11 +33,16 @@ def _setup_logging(verbose: bool) -> None:
 def main(
     verbose: Annotated[bool, typer.Option("--verbose", "-v")] = False,
     fake_llm: Annotated[bool, typer.Option("--fake-llm", help="Deterministic fake LLM (same as LLM_FAKE=1)")] = False,
+    repo: Annotated[Path | None, typer.Option("--repo", help="Git clone of the service being triaged (overrides REPO_PATH)")] = None,
 ) -> None:
     _setup_logging(verbose)
     s = get_settings()
     if fake_llm:
         s.llm_fake = True
+    if repo is not None:
+        if not (repo / ".git").exists():
+            raise typer.BadParameter(f"{repo} is not a git repository", param_hint="--repo")
+        s.repo_path = repo.resolve()
 
 
 def _store(s: Settings):
@@ -77,7 +82,8 @@ def run(
             from maxxing.api import start_server
 
             runner = await start_server(s, store, port=port)
-        console.print(f"[bold green]maxxing[/bold green] watching compose project [bold]{s.compose_project}[/bold] via {s.lb_url} "
+        console.print(f"[bold green]maxxing[/bold green] watching compose project [bold]{s.compose_project}[/bold] via {s.lb_url}, "
+                      f"repo {s.repo_path}{' (auto-fetch)' if s.git_auto_fetch else ''} "
                       f"(model: {'FAKE' if s.llm_fake else s.llm_model} @ {s.llm_base_url})")
         try:
             await Pipeline(s, store, ConsoleNotifier(store, console, details)).run(stop)

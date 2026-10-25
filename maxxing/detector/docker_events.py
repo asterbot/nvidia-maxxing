@@ -11,7 +11,7 @@ from maxxing.detector.signals import Kind, Signal
 
 log = logging.getLogger(__name__)
 
-IGNORED_SERVICES = {"traffic"}
+IGNORED_SERVICES = {"traffic", "docker-proxy"}
 
 
 def event_to_signal(ev: dict, service: str) -> Signal | None:

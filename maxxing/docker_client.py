@@ -6,6 +6,10 @@ from functools import lru_cache
 from typing import Any
 
 
+# Plumbing that lives in the compose project but isn't part of the service being triaged.
+INFRA_SERVICES = {"docker-proxy"}
+
+
 class DockerUnavailable(RuntimeError):
     pass
 
@@ -32,4 +36,5 @@ def project_filter(project: str, service: str | None = None) -> dict[str, list[s
 
 
 def list_containers(project: str, service: str | None = None, all: bool = True) -> list[Any]:
-    return get_client().containers.list(all=all, filters=project_filter(project, service))
+    containers = get_client().containers.list(all=all, filters=project_filter(project, service))
+    return [c for c in containers if c.labels.get("com.docker.compose.service") not in INFRA_SERVICES]

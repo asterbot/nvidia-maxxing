@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import os
 from functools import lru_cache
 from pathlib import Path
 
@@ -19,6 +20,12 @@ class Settings(BaseSettings):
     compose_project: str = "vip"
     api_service: str = "api"
     lb_url: str = "http://localhost:8080"
+    # Docker API of the machine running the service. Empty = the local socket / $DOCKER_HOST.
+    # e.g. https://<id>.ngrok-free.app when the containers run on another machine (read-only proxy).
+    docker_host: str = ""
+    # When the service runs elsewhere: `git fetch` the repo clone until the deployed SHA shows up.
+    git_auto_fetch: bool = False
+    git_fetch_timeout_s: float = 60.0
 
     # Local LLM (OpenAI-compatible: Ollama, NIM, vLLM...). Never point this at a remote API.
     llm_base_url: str = "http://localhost:11434/v1"
@@ -47,6 +54,10 @@ class Settings(BaseSettings):
 
     # Storage
     db_path: Path = Field(default=PACKAGE_ROOT / "incidents.db")
+
+    def model_post_init(self, __context) -> None:
+        if self.docker_host:  # docker-py reads it from the environment
+            os.environ["DOCKER_HOST"] = self.docker_host
 
     @property
     def deploys_file(self) -> Path:

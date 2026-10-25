@@ -57,6 +57,10 @@ class GitRepo:
         except (git.BadName, ValueError, git.GitCommandError):
             return None
 
+    def fetch(self) -> None:
+        """Update every remote branch and tag (tags forced: scenarios move `known-good`)."""
+        self.repo.git.fetch("--quiet", "--force", "--tags", "origin", "+refs/heads/*:refs/remotes/origin/*")
+
     def is_ancestor(self, a: str, b: str) -> bool:
         try:
             return self.repo.is_ancestor(a, b)
