@@ -1,7 +1,5 @@
-# nvidia-maxxing
-Servers? Ain't no thang.
-
-nvidia-maxxing is an autonomous outage triage agent that runs entirely on a **Dell Pro Max GB10**.
+# triage-bot
+triage-maxxing is an autonomous outage triage agent that runs entirely on a **Dell Pro Max GB10**.
 
 When production goes down, it:
 1. detects the outage
