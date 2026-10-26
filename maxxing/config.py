@@ -35,6 +35,9 @@ class Settings(BaseSettings):
     llm_max_steps: int = 8
     llm_timeout_s: float = 180.0
     llm_temperature: float = 0.1
+    llm_max_tokens: int = 0  # cap on tokens generated per call (0 = model default)
+    # Sent as `reasoning_effort` for thinking models (e.g. low / medium / high; empty = don't send)
+    llm_reasoning_effort: str = ""
 
     # Detector tuning
     health_interval_s: float = 2.0

@@ -65,6 +65,8 @@ class RCAAgent:
         temperature: float = 0.1,
         max_repairs: int = 2,
         repo: GitRepo | None = None,
+        max_tokens: int = 0,
+        reasoning_effort: str = "",
     ):
         self.client = client
         self.model = model
@@ -72,19 +74,32 @@ class RCAAgent:
         self.temperature = temperature
         self.max_repairs = max_repairs
         self.repo = repo
+        self.max_tokens = max_tokens
+        self.reasoning_effort = reasoning_effort
         self.trace = AgentTrace()
+        self._calls = 0
 
     async def _create(self, messages: list[dict], tools: bool) -> Any:
         kwargs: dict[str, Any] = {"model": self.model, "messages": messages, "temperature": self.temperature}
         if tools:
             kwargs["tools"] = TOOL_SPECS
             kwargs["tool_choice"] = "auto"
+        if self.max_tokens:
+            kwargs["max_tokens"] = self.max_tokens
+        if self.reasoning_effort:
+            kwargs["reasoning_effort"] = self.reasoning_effort
+        self._calls += 1
+        t0 = time.monotonic()
         try:
-            return await self.client.chat.completions.create(**kwargs)
+            resp = await self.client.chat.completions.create(**kwargs)
         except Exception as e:
             if tools and _is_tools_unsupported(e):
                 raise ToolsUnsupported(str(e)) from e
             raise
+        usage = getattr(resp, "usage", None)
+        log.info("LLM call %d (%s): %.1fs, prompt %s tok, output %s tok", self._calls, "tools" if tools else "final",
+                 time.monotonic() - t0, getattr(usage, "prompt_tokens", "?"), getattr(usage, "completion_tokens", "?"))
+        return resp
 
     async def run(self, bundle: EvidenceBundle) -> RCAReport:
         t0 = time.monotonic()
@@ -187,4 +202,6 @@ def build_agent(settings, repo: GitRepo | None = None) -> RCAAgent:
         max_steps=settings.llm_max_steps,
         temperature=settings.llm_temperature,
         repo=repo,
+        max_tokens=settings.llm_max_tokens,
+        reasoning_effort=settings.llm_reasoning_effort,
     )
